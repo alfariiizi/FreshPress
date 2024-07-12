@@ -14,7 +14,7 @@ export function Navbar({ children }: NavbarProps) {
       style={{
         height: navbarHeight,
       }}
-      className="bg-background text-foreground flex w-full border-b border-gray-300"
+      className="bg-background/60 text-foreground border-primary/20 sticky left-0 top-0 z-[1000] flex w-full border-b backdrop-blur-xl"
     >
       <MaxWidthDiv className="flex w-full items-center justify-between">
         {children}
