@@ -1,17 +1,9 @@
 import { buttonVariants } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import Link from "next/link";
 
 import React from "react";
 
-const categoryList = [
+export const categoryList = [
   {
     name: "Bussiness",
     url: "/bussiness",

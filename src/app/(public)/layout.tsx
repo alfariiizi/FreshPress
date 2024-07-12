@@ -3,6 +3,7 @@ import React from "react";
 import AuthButton from "./_components/AuthButton";
 import Categories from "./_components/Categories";
 import SearchInput from "./_components/SearchInput";
+import Footer from "@/components/footer";
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default function layout({ children }: Props) {
         <SearchInput />
         {children}
       </div>
+      <Footer />
     </div>
   );
 }
