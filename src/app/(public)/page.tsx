@@ -3,6 +3,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { getAllNews } from "./query";
+import Image from "next/image";
 
 export default function page() {
   return (
@@ -16,23 +18,22 @@ export default function page() {
   );
 }
 
-function HeadlineNews() {
+async function HeadlineNews() {
+  const headline = await getAllNews().then((d) => d[0]);
+
   return (
     <div className="flex gap-4">
       <div className="max-w-[500px] space-y-4">
-        <h2 className="text-wrap text-5xl font-semibold">
-          Apple will allow developers access to its NFC technology, avoiding an
-          EU fine
+        <h2
+          title={headline?.title}
+          className="line-clamp-4 text-wrap text-4xl font-semibold"
+        >
+          {headline?.title}
         </h2>
-        <p className="">
-          After four years of back and forth, the European Union and Apple have
-          finally come to an agreement on the latter&apos;s tap-and-go
-          technology. The European Commission announced Apple made &quot;legally
-          binding&quot; commitments to provide developers with their Near-Field
-          Co…
-        </p>
+        <p className="">{headline?.description}</p>
         <Link
-          href="#"
+          href={headline!.url}
+          target="_blank"
           className={cn(
             buttonVariants({
               variant: "link",
@@ -44,52 +45,40 @@ function HeadlineNews() {
           Read more
         </Link>
       </div>
-      <div className="bg-primary aspect-video h-[400px] w-[800px]" />
+      {/* <div className="bg-primary aspect-video h-[400px] w-[800px]" /> */}
+      <div className="aspect-auto h-[400px] w-[800px] bg-cover bg-clip-content">
+        <Image
+          src={headline!.urlToImage}
+          alt={headline!.title}
+          width={800}
+          height={400}
+          className="h-full w-full rounded-[5px] bg-cover object-cover"
+        />
+      </div>
     </div>
   );
 }
 
-const otherNewsData = [
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-];
+async function OtherNews() {
+  const data = await getAllNews().then((d) => d.slice(7, 18));
 
-function OtherNews() {
   return (
     <ul className="grid grid-cols-3 gap-8">
-      {otherNewsData.map((news, idx) => (
+      {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
-          <Link href="#">
-            <div className="bg-primary mx-auto aspect-video w-full" />
+          <Link target="_blank" href={news.url}>
+            {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
+            <div className="aspect-video w-full bg-cover bg-clip-content">
+              <Image
+                src={news.urlToImage}
+                alt={news.title}
+                width={800}
+                height={400}
+                className="h-full w-full rounded-[5px] bg-cover object-cover"
+              />
+            </div>
           </Link>
-          <Link href="#">
+          <Link target="_blank" href={news.url}>
             <h3 className="mt-2 text-lg font-semibold">{news.title}</h3>
           </Link>
           <p>{news.description}</p>
@@ -99,7 +88,9 @@ function OtherNews() {
   );
 }
 
-function LatestNews({ className }: { className?: string }) {
+async function LatestNews({ className }: { className?: string }) {
+  const data = await getAllNews().then((d) => d.slice(1, 6));
+
   return (
     <div className={cn(className)}>
       <div className="border-b-primary mb-4 border-b-2 text-xl font-semibold">
@@ -108,9 +99,9 @@ function LatestNews({ className }: { className?: string }) {
         </h2>
       </div>
       <ul className="flex flex-col gap-4">
-        {otherNewsData.map((news, idx) => (
-          <li key={`news-${idx + 1}`}>
-            <Link href="#">
+        {data.map((news, idx) => (
+          <li key={`latest-news-${idx + 1}`}>
+            <Link target="_blank" href={news.url}>
               <h3 className="font-semibold">{news.title}</h3>
             </Link>
             <p className="text-sm">{news.description}</p>
