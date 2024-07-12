@@ -15,14 +15,17 @@ export default function Form() {
       <InputField label="Password" id="password">
         <InputPassword required id="password" />
       </InputField>
+      <InputField label="API Key" id="api-key">
+        <Input required type="text" id="api-key" />
+      </InputField>
       <Button>Submit</Button>
       <p>
-        Don&apos; have an account?{" "}
+        Already have an account?{" "}
         <Link
-          href="/signup"
+          href="/login"
           className="font-semibold underline underline-offset-2"
         >
-          Create account
+          Login to your account
         </Link>
         .
       </p>

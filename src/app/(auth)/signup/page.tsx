@@ -12,7 +12,7 @@ export default function page() {
           <AppLogoWithTitle className="justify-center" />
         </Link>
         <h1 className="my-6 flex items-center justify-center text-center text-xl font-semibold">
-          Login into your account
+          Create your account
         </h1>
         <Form />
       </div>

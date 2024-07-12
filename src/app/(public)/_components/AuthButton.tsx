@@ -9,10 +9,7 @@ export default async function AuthButton() {
   if (!session) {
     return (
       <>
-        <Link
-          href="/register"
-          className={buttonVariants({ variant: "outline" })}
-        >
+        <Link href="/signup" className={buttonVariants({ variant: "outline" })}>
           Register
         </Link>
         <Link href="/login" className={buttonVariants({ variant: "default" })}>
