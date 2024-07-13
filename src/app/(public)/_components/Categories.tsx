@@ -5,20 +5,24 @@ import React from "react";
 
 export const categoryList = [
   {
-    name: "Bussiness",
-    url: "/bussiness",
+    name: "Business",
+    url: "/business",
   },
   {
     name: "Sport",
     url: "/sport",
   },
   {
-    name: "Travel",
-    url: "/travel",
+    name: "Politics",
+    url: "/politics",
   },
   {
-    name: "Culture",
-    url: "/culture",
+    name: "Entertainment",
+    url: "/entertainment",
+  },
+  {
+    name: "Health",
+    url: "/health",
   },
 ];
 

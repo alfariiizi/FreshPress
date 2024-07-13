@@ -2,6 +2,9 @@ import { MaxWidthDiv } from "@/components/max-width-div";
 import { capitalizeAll, cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { getCategoryNews } from "./query";
+import LatestNews from "../../_components/LatestNews";
+import Image from "next/image";
 
 type Props = {
   params: {
@@ -14,7 +17,7 @@ export default function page({ params: { category } }: Props) {
     <MaxWidthDiv>
       <h2 className="mt-6 text-4xl font-semibold">{capitalizeAll(category)}</h2>
       <div className="my-4 flex w-full gap-20">
-        <OtherNews />
+        <OtherNews category={category} />
         <LatestNews />
       </div>
     </MaxWidthDiv>
@@ -53,42 +56,30 @@ const otherNewsData = [
   },
 ];
 
-function OtherNews() {
+async function OtherNews({ category }: { category: string }) {
+  const data = await getCategoryNews(category);
+
   return (
     <ul className="grid grid-cols-3 gap-8">
-      {otherNewsData.map((news, idx) => (
+      {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
-          <Link href="#">
-            <div className="bg-primary mx-auto aspect-video w-full" />
+          <Link href={news.url} target="_blank">
+            <div className="aspect-video w-full bg-cover bg-clip-content">
+              <Image
+                src={news.urlToImage}
+                alt={news.title}
+                width={800}
+                height={400}
+                className="h-full w-full rounded-[5px] bg-cover object-cover"
+              />
+            </div>
           </Link>
-          <Link href="#">
+          <Link href={news.url} target="_blank">
             <h3 className="mt-2 text-lg font-semibold">{news.title}</h3>
           </Link>
           <p>{news.description}</p>
         </li>
       ))}
     </ul>
-  );
-}
-
-function LatestNews({ className }: { className?: string }) {
-  return (
-    <div className={cn(className)}>
-      <div className="border-b-primary mb-4 border-b-2 text-xl font-semibold">
-        <h2 className="bg-primary text-background w-fit px-2 py-1">
-          Latest News
-        </h2>
-      </div>
-      <ul className="flex flex-col gap-4">
-        {otherNewsData.map((news, idx) => (
-          <li key={`news-${idx + 1}`}>
-            <Link href="#">
-              <h3 className="font-semibold">{news.title}</h3>
-            </Link>
-            <p className="text-sm">{news.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }

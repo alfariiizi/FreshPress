@@ -11,7 +11,6 @@ const config = {
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
   rules: {
-    "@typescript-eslint/no-unsafe-return": 'off',
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/array-type": "off",
@@ -41,4 +40,3 @@ const config = {
   },
 };
 module.exports = config;
-
