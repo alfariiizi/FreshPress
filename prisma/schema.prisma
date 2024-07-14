@@ -14,17 +14,17 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
-
-    @@index([name])
-}
+// model Post {
+//     id        Int      @id @default(autoincrement())
+//     name      String
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+//
+//     createdBy   User   @relation(fields: [createdById], references: [id])
+//     createdById String
+//
+//     @@index([name])
+// }
 
 // Necessary for Next auth
 model Account {
@@ -55,14 +55,18 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?        @unique
     emailVerified DateTime?
     image         String?
+    password      String?
+    birthPlace    String
+    birthDate     DateTime
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
+    savedArticles SavedArticle[]
+    // posts         Post[]
 }
 
 model VerificationToken {
@@ -72,3 +76,28 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+// New models for additional features
+model Article {
+    id          String         @id @default(cuid())
+    title       String
+    content     String
+    url         String
+    author      String?
+    publishedAt DateTime
+    savedBy     SavedArticle[]
+}
+
+model SavedArticle {
+    id        String   @id @default(cuid())
+    userId    String
+    articleId String
+    savedAt   DateTime @default(now())
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, articleId])
+}
+
+
+

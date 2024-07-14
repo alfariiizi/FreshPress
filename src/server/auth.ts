@@ -5,8 +5,10 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
+import Creadentials from "next-auth/providers/credentials";
 
 import { db } from "@/server/db";
+import Credentials from "next-auth/providers/credentials";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -55,6 +57,24 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
+    Credentials({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "Email" },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "Password",
+        },
+      },
+      authorize(credentials, req) {
+        return {
+          name: credentials?.email,
+          email: credentials?.email,
+        };
+      },
+    }),
   ],
 };
 
