@@ -12,7 +12,7 @@ export default async function LatestNews({
   return (
     <div className={cn(className)}>
       <div className="border-b-primary mb-4 border-b-2 text-xl font-semibold">
-        <h2 className="bg-primary text-background w-fit px-2 py-1">
+        <h2 className="bg-primary text-foreground w-fit px-2 py-1">
           Latest News
         </h2>
       </div>

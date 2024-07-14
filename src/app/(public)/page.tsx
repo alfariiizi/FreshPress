@@ -3,20 +3,41 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
-import { getAllNews } from "./query";
+import { getAllNews, getSearchNews } from "./query";
 import Image from "next/image";
 import LatestNews from "./_components/LatestNews";
 
-export const revalidate = 1800;
+type Props = {
+  searchParams: {
+    search?: string;
+  };
+};
 
-export default function page() {
+export default function page({ searchParams: { search } }: Props) {
+  if (search && search.length !== 0) {
+    return (
+      <MaxWidthDiv
+        smallPadding
+        className="mt-10 flex flex-col gap-20 md:flex-row"
+      >
+        <div className="flex w-full flex-col gap-20 md:w-3/4">
+          <SearchNews search={search} />
+        </div>
+        <LatestNews className="w-full md:w-1/4" />
+      </MaxWidthDiv>
+    );
+  }
+
   return (
-    <MaxWidthDiv className="mt-10 flex gap-20">
-      <div className="flex w-3/4 flex-col gap-20">
+    <MaxWidthDiv
+      smallPadding
+      className="mt-10 flex flex-col gap-20 md:flex-row"
+    >
+      <div className="flex w-full flex-col gap-20 md:w-3/4">
         <HeadlineNews />
         <OtherNews />
       </div>
-      <LatestNews className="w-1/4" />
+      <LatestNews className="w-full md:w-1/4" />
     </MaxWidthDiv>
   );
 }
@@ -25,7 +46,7 @@ async function HeadlineNews() {
   const headline = await getAllNews().then((d) => d[0]);
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-col-reverse gap-4 md:flex-row">
       <div className="max-w-[500px] space-y-4">
         <h2
           title={headline?.title}
@@ -42,14 +63,14 @@ async function HeadlineNews() {
               variant: "link",
               className: "h-fit w-fit p-0",
             }),
-            "p-0 underline",
+            "text-foreground p-0 underline",
           )}
         >
           Read more
         </Link>
       </div>
       {/* <div className="bg-primary aspect-video h-[400px] w-[800px]" /> */}
-      <div className="aspect-auto h-[400px] w-[800px] bg-cover bg-clip-content">
+      <div className="aspect-auto max-h-[400px] max-w-[800px] bg-cover bg-clip-content">
         <Image
           src={headline!.urlToImage}
           alt={headline!.title}
@@ -66,7 +87,7 @@ async function OtherNews() {
   const data = await getAllNews().then((d) => d.slice(7, 18));
 
   return (
-    <ul className="grid grid-cols-3 gap-8">
+    <ul className="grid grid-cols-2 gap-8 md:grid-cols-3">
       {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
           <Link target="_blank" href={news.url}>
@@ -85,6 +106,35 @@ async function OtherNews() {
             <h3 className="mt-2 text-lg font-semibold">{news.title}</h3>
           </Link>
           <p>{news.description}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+async function SearchNews({ search }: { search: string }) {
+  const data = await getSearchNews(search).then((d) => d.slice(0, 20));
+
+  return (
+    <ul className="grid grid-cols-2 gap-8 md:grid-cols-3">
+      {data.map((news, idx) => (
+        <li key={`news-${idx + 1}`} className="">
+          <Link target="_blank" href={news.url}>
+            {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
+            <div className="aspect-video w-full bg-cover bg-clip-content">
+              <Image
+                src={news.urlToImage}
+                alt={news.title}
+                width={800}
+                height={400}
+                className="h-full w-full rounded-[5px] bg-cover object-cover"
+              />
+            </div>
+          </Link>
+          <Link target="_blank" href={news.url}>
+            <h3 className="mt-2 text-lg font-semibold">{news.title}</h3>
+          </Link>
+          <p className="min-w-0">{news.description}</p>
         </li>
       ))}
     </ul>

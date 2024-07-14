@@ -28,7 +28,7 @@ export const categoryList = [
 
 export default function Categories() {
   return (
-    <menu className="flex gap-3">
+    <menu className="hidden gap-3 md:flex">
       {categoryList.map((category) => (
         <li key={category.name}>
           <Link

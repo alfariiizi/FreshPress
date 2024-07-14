@@ -20,10 +20,10 @@ export default function AppLogoWithTitle({ light, className }: Props) {
       <h2
         className={cn(
           "font-display text-2xl font-semibold",
-          light ? "text-primary-foreground" : "text-primary",
+          !light ? "text-primary-foreground" : "text-primary",
         )}
       >
-        FreshPress
+        Star Library
       </h2>
     </div>
   );

@@ -18,3 +18,20 @@ export const getAllNews = cache(async () => {
     .then((d) => d.data.articles.filter((f) => !!f.urlToImage && !!f.url));
   return res;
 }, ["getAllNews"]);
+
+export const getSearchNews = cache(
+  async (search: string) => {
+    const res = await newsApi
+      .get<{
+        articles: Article[];
+      }>("/everything", {
+        params: {
+          // apiKey: process.env.NEWS_API_KEY,
+          q: search,
+        },
+      })
+      .then((d) => d.data.articles.filter((f) => !!f.urlToImage && !!f.url));
+    return res;
+  },
+  ["getSearchNews"],
+);

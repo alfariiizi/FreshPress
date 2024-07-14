@@ -12,8 +12,17 @@ export default function Form() {
       <InputField label="Email" id="email">
         <Input required type="email" id="email" />
       </InputField>
+      <InputField label="Tempat Lahir" id="born-place">
+        <Input required type="text" id="born-place" />
+      </InputField>
+      <InputField label="Tanggal Lahir" id="born-date">
+        <Input required type="date" id="born-date" />
+      </InputField>
       <InputField label="Password" id="password">
         <InputPassword required id="password" />
+      </InputField>
+      <InputField label="Password Confirmation" id="password-confirm">
+        <InputPassword required id="password-confirm" />
       </InputField>
       <InputField label="API Key" id="api-key">
         <Input required type="text" id="api-key" />

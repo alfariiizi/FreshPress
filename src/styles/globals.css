@@ -3,48 +3,47 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 17% 95%;
-  --foreground: 0 5% 10%;
-  --card: 0 17% 90%;
-  --card-foreground: 0 5% 15%;
-  --popover: 0 17% 95%;
-  --popover-foreground: 0 95% 10%;
-  --primary: 0 0% 16.5%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 17% 80%;
+  --background: 50 17% 95%;
+  --foreground: 50 5% 10%;
+  --card: 50 17% 90%;
+  --card-foreground: 50 5% 15%;
+  --popover: 50 17% 95%;
+  --popover-foreground: 50 95% 10%;
+  --primary: 50 100% 86.9%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 50 17% 80%;
   --secondary-foreground: 0 0% 0%;
-  --muted: -38 17% 85%;
-  --muted-foreground: 0 5% 40%;
-  --accent: -38 17% 80%;
-  --accent-foreground: 0 5% 15%;
+  --muted: 12 17% 85%;
+  --muted-foreground: 50 5% 40%;
+  --accent: 12 17% 80%;
+  --accent-foreground: 50 5% 15%;
   --destructive: 0 50% 50%;
-  --destructive-foreground: 0 5% 90%;
-  --border: 0 20% 80%;
-  --input: 0 20% 50%;
-  --ring: 0 0% 16.5%;
-  /* --radius: 0.5rem; */
-  --radius: 0rem;
+  --destructive-foreground: 50 5% 90%;
+  --border: 50 20% 80%;
+  --input: 50 20% 50%;
+  --ring: 50 100% 86.9%;
+  --radius: 0.5rem;
 }
 .dark {
-  --background: 0 17% 10%;
-  --foreground: 0 5% 90%;
-  --card: 0 17% 10%;
-  --card-foreground: 0 5% 90%;
-  --popover: 0 17% 5%;
-  --popover-foreground: 0 5% 90%;
-  --primary: 0 0% 16.5%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 17% 20%;
+  --background: 50 17% 10%;
+  --foreground: 50 5% 90%;
+  --card: 50 17% 10%;
+  --card-foreground: 50 5% 90%;
+  --popover: 50 17% 5%;
+  --popover-foreground: 50 5% 90%;
+  --primary: 50 100% 86.9%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 50 17% 20%;
   --secondary-foreground: 0 0% 100%;
-  --muted: -38 17% 25%;
-  --muted-foreground: 0 5% 65%;
-  --accent: -38 17% 25%;
-  --accent-foreground: 0 5% 90%;
+  --muted: 12 17% 25%;
+  --muted-foreground: 50 5% 65%;
+  --accent: 12 17% 25%;
+  --accent-foreground: 50 5% 90%;
   --destructive: 0 50% 50%;
-  --destructive-foreground: 0 5% 90%;
-  --border: 0 20% 50%;
-  --input: 0 20% 50%;
-  --ring: 0 0% 16.5%;
+  --destructive-foreground: 50 5% 90%;
+  --border: 50 20% 50%;
+  --input: 50 20% 50%;
+  --ring: 50 100% 86.9%;
   --radius: 0.5rem;
 }
 
@@ -56,4 +55,3 @@
     @apply bg-background text-foreground;
   }
 }
-

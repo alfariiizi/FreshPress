@@ -4,6 +4,9 @@ import AuthButton from "./_components/AuthButton";
 import Categories from "./_components/Categories";
 import SearchInput from "./_components/SearchInput";
 import Footer from "@/components/footer";
+import MobileMenu from "./_components/MobileMenu";
+
+export const revalidate = 1800;
 
 type Props = {
   children: React.ReactNode;
@@ -15,9 +18,10 @@ export default function layout({ children }: Props) {
       <Navbar>
         <NavbarLogo />
         <Categories />
-        <NavbarRight className="gap-3">
+        <NavbarRight className="hidden gap-3 md:flex">
           <AuthButton />
         </NavbarRight>
+        <MobileMenu />
       </Navbar>
       <div className="relative flex flex-col gap-4">
         <SearchInput />

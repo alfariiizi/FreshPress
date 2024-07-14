@@ -28,7 +28,7 @@ export function NavbarLogo() {
   return (
     <Link href="/" className="flex items-center gap-2">
       <AppLogo />
-      <h1 className="font-display text-2xl font-semibold">FreshPress</h1>
+      <h1 className="font-display text-2xl font-semibold">Star Library</h1>
     </Link>
   );
 }

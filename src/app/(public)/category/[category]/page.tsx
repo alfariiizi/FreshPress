@@ -14,9 +14,9 @@ type Props = {
 
 export default function page({ params: { category } }: Props) {
   return (
-    <MaxWidthDiv>
+    <MaxWidthDiv smallPadding>
       <h2 className="mt-6 text-4xl font-semibold">{capitalizeAll(category)}</h2>
-      <div className="my-4 flex w-full gap-20">
+      <div className="my-4 flex w-full flex-col gap-20 md:flex-row">
         <OtherNews category={category} />
         <LatestNews />
       </div>
@@ -60,7 +60,7 @@ async function OtherNews({ category }: { category: string }) {
   const data = await getCategoryNews(category);
 
   return (
-    <ul className="grid grid-cols-3 gap-8">
+    <ul className="grid grid-cols-2 gap-8 md:grid-cols-3">
       {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
           <Link href={news.url} target="_blank">

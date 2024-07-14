@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
+import Image from "next/image";
 
 type Props = {
   className?: string;
@@ -7,14 +8,13 @@ type Props = {
 
 export default function AppLogo({ className }: Props) {
   return (
-    <div
-      className={cn(
-        buttonVariants(),
-        "font-display hover:bg-primary h-auto w-auto rounded-none px-2 py-1 text-xl font-semibold",
-        className,
-      )}
-    >
-      FP
-    </div>
+    <Image
+      src="/images/app-logo.png"
+      alt="App Logo"
+      width={300}
+      height={300}
+      className="size-12 rounded-sm"
+      draggable={false}
+    />
   );
 }
