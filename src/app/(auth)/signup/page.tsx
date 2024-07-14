@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function page() {
   return (
-    <MaxWidthDiv className="flex h-dvh items-center justify-center">
+    <MaxWidthDiv className="my-10 flex h-dvh items-center justify-center">
       <div className="border-primary/30 border-2 px-8 py-4">
         <Link href="/">
           <AppLogoWithTitle className="justify-center" />
