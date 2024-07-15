@@ -7,17 +7,27 @@ import AppLogo from "../AppLogo";
 
 type NavbarProps = {
   children: React.ReactNode;
+  isFullWidth?: boolean;
+  isFixed?: boolean;
 };
 
-export function Navbar({ children }: NavbarProps) {
+export function Navbar({ children, isFixed, isFullWidth }: NavbarProps) {
   return (
     <nav
       style={{
         height: navbarHeight,
       }}
-      className="bg-background/60 text-foreground border-primary/20 sticky left-0 top-0 z-[1000] flex w-full border-b backdrop-blur-xl"
+      className={cn(
+        "bg-background/60 text-foreground border-primary/20 sticky left-0 top-0 z-[1000] flex w-full border-b border-b-zinc-300 backdrop-blur-xl",
+        isFixed && "fixed",
+      )}
     >
-      <MaxWidthDiv className="flex w-full items-center justify-between">
+      <MaxWidthDiv
+        className={cn(
+          "flex w-full items-center justify-between",
+          isFullWidth && "max-w-full",
+        )}
+      >
         {children}
       </MaxWidthDiv>
     </nav>

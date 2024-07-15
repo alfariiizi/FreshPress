@@ -19,5 +19,9 @@ export default async function AuthButton() {
     );
   }
 
-  return <div>AuthButton</div>;
+  return (
+    <Link href="/dashboard" className={buttonVariants({ variant: "outline" })}>
+      Go to Dashboard
+    </Link>
+  );
 }

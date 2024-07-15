@@ -5,10 +5,10 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
-import Creadentials from "next-auth/providers/credentials";
-
 import { db } from "@/server/db";
 import Credentials from "next-auth/providers/credentials";
+import { hashPassword } from "@/lib/hash-password";
+import { type DefaultJWT, type JWT } from "next-auth/jwt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -20,15 +20,31 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      name: string;
+      email: string;
+      birthPlace: string;
+      birthDate: Date;
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    // ...other properties
+    id: string;
+    name: string;
+    email: string;
+    birthPlace: string;
+    birthDate: Date;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends DefaultJWT {
+    id: string;
+    name: string;
+    email: string;
+    birthPlace: string;
+    birthDate: Date;
+  }
 }
 
 /**
@@ -38,14 +54,43 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    jwt: ({ token }) => {
+      console.warn("DEBUGPRINT[3]: auth.ts:47 (before console.debug(token))");
+      console.debug({ token });
+      return {
+        ...token,
+        id: token.id,
+      };
+    },
+    session: async ({ token, session, user }) => {
+      console.warn("DEBUGPRINT[4]: auth.ts:52 (before console.debug(session))");
+      console.debug({ session, user });
+      const userDb = await db.user.findUnique({
+        where: {
+          email: token.email,
+        },
+      });
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: userDb?.id,
+          name: userDb?.name,
+          email: userDb?.email,
+          birthPlace: userDb?.birthPlace,
+          birthDate: userDb?.birthDate,
+        },
+      };
+    },
   },
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/login",
+  },
+  debug: process.env.NODE_ENV === "development",
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
     /**
@@ -68,11 +113,38 @@ export const authOptions: NextAuthOptions = {
           placeholder: "Password",
         },
       },
-      authorize(credentials, req) {
-        return {
-          name: credentials?.email,
-          email: credentials?.email,
-        };
+      // @ts-ignore
+      async authorize(credentials) {
+        if (!credentials?.password) {
+          return null;
+        }
+
+        const user = await db.user.findUnique({
+          where: {
+            email: credentials.email,
+            password: hashPassword(credentials.password),
+          },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            birthPlace: true,
+            birthDate: true,
+          },
+        });
+        console.warn("DEBUGPRINT[2]: auth.ts:93 (before console.debug(user))");
+        console.debug({ user });
+
+        if (!user) {
+          return null;
+        }
+
+        return user;
+
+        // return {
+        //   name: credentials?.email,
+        //   email: credentials?.email,
+        // };
       },
     }),
   ],

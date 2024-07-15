@@ -6,6 +6,7 @@ import React from "react";
 import { getAllNews, getSearchNews } from "./query";
 import Image from "next/image";
 import LatestNews from "./_components/LatestNews";
+import SavedButton from "../_components/saved-button";
 
 type Props = {
   searchParams: {
@@ -70,13 +71,25 @@ async function HeadlineNews() {
         </Link>
       </div>
       {/* <div className="bg-primary aspect-video h-[400px] w-[800px]" /> */}
-      <div className="aspect-auto max-h-[400px] max-w-[800px] bg-cover bg-clip-content">
+      <div className="relative aspect-auto max-h-[400px] max-w-[800px] bg-cover bg-clip-content">
         <Image
           src={headline!.urlToImage}
           alt={headline!.title}
           width={800}
           height={400}
           className="h-full w-full rounded-[5px] bg-cover object-cover"
+        />
+        <SavedButton
+          data={{
+            title: headline!.title,
+            description: headline?.description,
+            imageUrl: headline?.urlToImage,
+            content: headline?.content,
+            url: headline?.url,
+            author: headline?.author,
+            publishedAt: headline?.publishedAt,
+          }}
+          className="absolute right-2 top-2"
         />
       </div>
     </div>
@@ -90,9 +103,9 @@ async function OtherNews() {
     <ul className="grid grid-cols-2 gap-8 md:grid-cols-3">
       {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
-          <Link target="_blank" href={news.url}>
+          <div>
             {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
-            <div className="aspect-video w-full bg-cover bg-clip-content">
+            <div className="relative aspect-video w-full bg-cover bg-clip-content">
               <Image
                 src={news.urlToImage}
                 alt={news.title}
@@ -100,8 +113,20 @@ async function OtherNews() {
                 height={400}
                 className="h-full w-full rounded-[5px] bg-cover object-cover"
               />
+              <SavedButton
+                data={{
+                  title: news.title,
+                  description: news?.description,
+                  imageUrl: news?.urlToImage,
+                  content: news?.content,
+                  url: news?.url,
+                  author: news?.author,
+                  publishedAt: news?.publishedAt,
+                }}
+                className="absolute right-2 top-2"
+              />
             </div>
-          </Link>
+          </div>
           <Link target="_blank" href={news.url}>
             <h3 className="mt-2 text-lg font-semibold">{news.title}</h3>
           </Link>

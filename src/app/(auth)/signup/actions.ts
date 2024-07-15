@@ -1,11 +1,7 @@
 "use server";
 
-import { SHA256 as sha256 } from "crypto-js";
+import { hashPassword } from "@/lib/hash-password";
 import { db } from "@/server/db";
-
-const hashPassword = (value: string) => {
-  return sha256(value).toString();
-};
 
 type CreateAccountForm = {
   name: string;

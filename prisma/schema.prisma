@@ -81,10 +81,12 @@ model VerificationToken {
 model Article {
     id          String         @id @default(cuid())
     title       String
-    content     String
-    url         String
+    description String?
+    content     String?
+    url         String?
+    imageUrl    String?
     author      String?
-    publishedAt DateTime
+    publishedAt DateTime?
     savedBy     SavedArticle[]
 }
 
@@ -98,6 +100,3 @@ model SavedArticle {
 
     @@unique([userId, articleId])
 }
-
-
-

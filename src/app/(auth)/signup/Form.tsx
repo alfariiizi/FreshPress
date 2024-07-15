@@ -8,7 +8,6 @@ import React from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAction } from "next-safe-action/hooks";
 import { createAccount } from "./actions";
 import { useRouter } from "next/navigation";
 
