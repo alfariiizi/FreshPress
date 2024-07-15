@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createAccount } from "./actions";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 // yup schema
 export const CreateUserSchema = yup.object().shape({
@@ -46,6 +47,7 @@ export default function Form() {
             birthDate: data.birthDate,
           });
           if (user) {
+            toast.success("Your account has been created!");
             router.push("/login");
           }
         })(e);

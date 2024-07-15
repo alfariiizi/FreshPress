@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { HiOutlineBookmark } from "react-icons/hi";
 import { type ArticleData } from ".";
 import { deleteArticle, saveArticle } from "./actions";
+import toast from "react-hot-toast";
 
 type Props = {
   articleId?: string;
@@ -34,6 +35,7 @@ export default function SavedButtonClient(props: Props) {
               title: props.data.title,
               userId: props.session.user.id,
             });
+            toast.success("Remove from bookmark!");
             router.refresh();
           } else {
             await saveArticle({
@@ -48,6 +50,7 @@ export default function SavedButtonClient(props: Props) {
                 description: props.data.description,
               },
             });
+            toast.success("Added into bookmark!");
             router.refresh();
           }
         }

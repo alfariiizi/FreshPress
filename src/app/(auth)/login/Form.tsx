@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
 export const LoginSchema = yup.object().shape({
   email: yup.string().email().required("Email is a required field"),
@@ -35,6 +36,7 @@ export default function Form() {
             password: data.password,
           });
           if (res?.ok) {
+            toast.success("Logged in!");
             router.push("/dashboard");
           }
         })(e);

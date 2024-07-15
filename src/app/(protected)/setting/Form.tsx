@@ -8,6 +8,7 @@ import { updateUser } from "./actions";
 import { InputField } from "@/components/ui/input-field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 // yup schema
 export const CreateUserSchema = yup.object().shape({
@@ -65,6 +66,7 @@ export default function Form({ userId, initialData }: Props) {
             id: userId,
           });
         })(e);
+        toast.success("Your account information has been updated!");
         router.refresh();
       }}
     >
