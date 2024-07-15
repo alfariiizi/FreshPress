@@ -70,7 +70,6 @@ async function HeadlineNews() {
           Read more
         </Link>
       </div>
-      {/* <div className="bg-primary aspect-video h-[400px] w-[800px]" /> */}
       <div className="relative aspect-auto max-h-[400px] max-w-[800px] bg-cover bg-clip-content">
         <Image
           src={headline!.urlToImage}
@@ -104,7 +103,6 @@ async function OtherNews() {
       {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
           <div>
-            {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
             <div className="relative aspect-video w-full bg-cover bg-clip-content">
               <Image
                 src={news.urlToImage}
@@ -145,7 +143,6 @@ async function SearchNews({ search }: { search: string }) {
       {data.map((news, idx) => (
         <li key={`news-${idx + 1}`} className="">
           <div>
-            {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
             <div className="relative aspect-video w-full bg-cover bg-clip-content">
               <Image
                 src={news.urlToImage}

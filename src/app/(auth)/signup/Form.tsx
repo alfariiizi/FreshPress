@@ -11,15 +11,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createAccount } from "./actions";
 import { useRouter } from "next/navigation";
 
-// type FormInputType = {
-//   name: string
-//   email: string
-//   birthPlace: string
-//   birthDate: Date
-//   password: string
-//   passwordConfirmation: string
-// }
-
 // yup schema
 export const CreateUserSchema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
@@ -40,13 +31,6 @@ export default function Form() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(CreateUserSchema) });
-  // const { executeAsync, isExecuting } = useAction(createAccount, {
-  //   onSuccess({ data }) {
-  //     if (data) {
-  //       router.push("/login");
-  //     }
-  //   },
-  // });
 
   return (
     <form
@@ -64,9 +48,6 @@ export default function Form() {
           if (user) {
             router.push("/login");
           }
-          // await executeAsync({
-          //   ...data,
-          // });
         })(e);
       }}
     >

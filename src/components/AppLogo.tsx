@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "./ui/button";
 import Image from "next/image";
 
 type Props = {
@@ -13,7 +12,7 @@ export default function AppLogo({ className }: Props) {
       alt="App Logo"
       width={300}
       height={300}
-      className="size-12 rounded-sm"
+      className={cn("size-12 rounded-sm", className)}
       draggable={false}
     />
   );

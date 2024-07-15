@@ -32,7 +32,6 @@ export default function SearchInput() {
           onChange={(e) => {
             e.preventDefault();
             setLocalSearch(e.target.value);
-            // await setSearch(e.target.value)
           }}
         />
       </form>

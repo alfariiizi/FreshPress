@@ -14,7 +14,6 @@ export default async function page() {
         {articles?.map((article) => (
           <li key={article.id}>
             <div>
-              {/* <div className="bg-primary mx-auto aspect-video w-full" /> */}
               <div className="relative aspect-video w-full bg-cover bg-clip-content">
                 <Image
                   src={article.imageUrl ?? ""}

@@ -8,6 +8,7 @@ import { type Adapter } from "next-auth/adapters";
 import { db } from "@/server/db";
 import Credentials from "next-auth/providers/credentials";
 import { hashPassword } from "@/lib/hash-password";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { type DefaultJWT, type JWT } from "next-auth/jwt";
 
 /**
@@ -60,7 +61,7 @@ export const authOptions: NextAuthOptions = {
         id: token.id,
       };
     },
-    session: async ({ token, session, user }) => {
+    session: async ({ token, session }) => {
       const userDb = await db.user.findUnique({
         where: {
           email: token.email,
@@ -134,11 +135,6 @@ export const authOptions: NextAuthOptions = {
         }
 
         return user;
-
-        // return {
-        //   name: credentials?.email,
-        //   email: credentials?.email,
-        // };
       },
     }),
   ],

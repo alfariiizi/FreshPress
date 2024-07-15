@@ -5,7 +5,6 @@ export const getCategoryNews = cache(
   async (category: string) => {
     const res = await newsApi
       .get<{
-        // sources: NewsSource[];
         articles: Article[];
       }>("/top-headlines", {
         params: {

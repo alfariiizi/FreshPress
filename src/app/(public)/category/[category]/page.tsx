@@ -1,5 +1,5 @@
 import { MaxWidthDiv } from "@/components/max-width-div";
-import { capitalizeAll, cn } from "@/lib/utils";
+import { capitalizeAll } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 import { getCategoryNews } from "./query";
@@ -24,38 +24,6 @@ export default function page({ params: { category } }: Props) {
     </MaxWidthDiv>
   );
 }
-
-const otherNewsData = [
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-  {
-    title:
-      "Apple will allow developers access to its NFC technology, avoiding an EU fine",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin bibendum fringilla massa vel convallis. Aliquam nunc mauris, vestibulum et dolor vel, egestas eleifend tortor. Donec molestie tincidunt libero.",
-  },
-];
 
 async function OtherNews({ category }: { category: string }) {
   const data = await getCategoryNews(category);

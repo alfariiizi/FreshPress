@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { MaxWidthDiv } from "../max-width-div";
 import { navbarHeight } from "./shared";
-import { Button, buttonVariants } from "../ui/button";
 import Link from "next/link";
 import AppLogo from "../AppLogo";
 

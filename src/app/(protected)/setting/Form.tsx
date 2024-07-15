@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/navigation";
 import { updateUser } from "./actions";
 import { InputField } from "@/components/ui/input-field";
-import { Input, InputPassword } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 // yup schema
@@ -93,13 +93,6 @@ export default function Form({ userId, data }: Props) {
       >
         <Input required type="date" id="born-date" {...register("birthDate")} />
       </InputField>
-      {/* <InputField */}
-      {/*   label="Password" */}
-      {/*   id="password" */}
-      {/*   errorMessage={errors.password?.message} */}
-      {/* > */}
-      {/*   <InputPassword required id="password" {...register("password")} /> */}
-      {/* </InputField> */}
       <Button isLoading={isSubmitting} className="w-fit">
         Submit
       </Button>

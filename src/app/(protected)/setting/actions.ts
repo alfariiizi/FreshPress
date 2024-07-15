@@ -1,6 +1,5 @@
 "use server";
 
-import { hashPassword } from "@/lib/hash-password";
 import { db } from "@/server/db";
 
 type UpdateuserForm = {
