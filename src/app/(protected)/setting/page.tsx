@@ -18,6 +18,9 @@ export default async function page() {
     },
   });
 
+  console.warn("DEBUGPRINT[1]: page.tsx:21 (before console.debug(userData))");
+  console.debug({ userData });
+
   return (
     <div className="space-y-4">
       <Link href="/dashboard" className="underline underline-offset-2">
@@ -26,7 +29,7 @@ export default async function page() {
       <h2 className="font-display text-3xl font-medium">User Preference</h2>
       <Form
         userId={session.user.id}
-        data={{
+        initialData={{
           name: userData?.name,
           birthPlace: userData?.birthPlace,
           birthDate: userData?.birthDate,
