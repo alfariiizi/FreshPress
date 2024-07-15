@@ -11,6 +11,7 @@ const config = {
     "plugin:@typescript-eslint/stylistic-type-checked",
   ],
   rules: {
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",

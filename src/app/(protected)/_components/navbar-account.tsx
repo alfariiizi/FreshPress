@@ -34,7 +34,7 @@ export default async function NavbarAccount() {
         <MenubarContent className="z-[150]">
           <MenubarItem asChild>
             <Link
-              href="/settings"
+              href="/setting"
               className="inline-flex w-full cursor-pointer items-center gap-3 text-gray-600 duration-150 focus:text-gray-700"
             >
               <MdOutlineSettings className="size-5" />

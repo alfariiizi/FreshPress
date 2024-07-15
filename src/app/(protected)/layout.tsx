@@ -3,8 +3,6 @@ import { navbarHeight } from "@/components/navbar/shared";
 import { getServerAuthSession } from "@/server/auth";
 import { redirect } from "next/navigation";
 import React from "react";
-import { CgProfile } from "react-icons/cg";
-import Sidebar from "./_components/sidebar";
 import NavbarAccount from "./_components/navbar-account";
 
 type Props = {
@@ -14,8 +12,6 @@ type Props = {
 export default async function layout({ children }: Props) {
   const session = await getServerAuthSession();
 
-  console.warn("DEBUGPRINT[1]: layout.tsx:11 (before console.debug(session))");
-  console.debug({ session });
   if (!session) {
     redirect("/login");
   }

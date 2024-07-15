@@ -55,16 +55,12 @@ declare module "next-auth/jwt" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: ({ token }) => {
-      console.warn("DEBUGPRINT[3]: auth.ts:47 (before console.debug(token))");
-      console.debug({ token });
       return {
         ...token,
         id: token.id,
       };
     },
     session: async ({ token, session, user }) => {
-      console.warn("DEBUGPRINT[4]: auth.ts:52 (before console.debug(session))");
-      console.debug({ session, user });
       const userDb = await db.user.findUnique({
         where: {
           email: token.email,
@@ -132,8 +128,6 @@ export const authOptions: NextAuthOptions = {
             birthDate: true,
           },
         });
-        console.warn("DEBUGPRINT[2]: auth.ts:93 (before console.debug(user))");
-        console.debug({ user });
 
         if (!user) {
           return null;

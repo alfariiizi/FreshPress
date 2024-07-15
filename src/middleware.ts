@@ -11,6 +11,7 @@ export const config = {
      */
     // "/((?!api|_next|.*\\..*).*)",
     "/dashboard",
+    "/setting"
     // '/((?!api|auth|_next/static|_next/image|favicon.ico|.+\\.svg).*)',
   ],
 };

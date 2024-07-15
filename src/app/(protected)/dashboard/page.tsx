@@ -6,8 +6,6 @@ import SavedButton from "@/app/_components/saved-button";
 
 export default async function page() {
   const articles = await getSavedArticle();
-  console.warn("DEBUGPRINT[1]: page.tsx:8 (before console.debug(articles))");
-  console.debug({ articles });
 
   return (
     <div>
@@ -30,9 +28,9 @@ export default async function page() {
                   data={{
                     title: article.title,
                     // @ts-ignore
-                    description: article!.description,
+                    description: article.description,
                     // @ts-ignore
-                    imageUrl: article!.imageUrl,
+                    imageUrl: article.imageUrl,
                     // @ts-ignore
                     content: article?.content,
                     // @ts-ignore
