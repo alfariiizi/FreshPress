@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import Sidebar from "./_components/sidebar";
+import NavbarAccount from "./_components/navbar-account";
 
 type Props = {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export default async function layout({ children }: Props) {
       <Navbar isFixed isFullWidth>
         <NavbarLogo />
         <NavbarRight className="flex gap-2 font-medium">
-          <CgProfile className="size-5" /> {session.user.name}
+          <NavbarAccount />
         </NavbarRight>
       </Navbar>
       <div

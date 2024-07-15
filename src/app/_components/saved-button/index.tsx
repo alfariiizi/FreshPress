@@ -20,6 +20,17 @@ type Props = {
 
 export default async function SavedButton({ data, className }: Props) {
   const session = await getServerAuthSession();
+
+  if (!session) {
+    return (
+      <SavedButtonClient
+        data={data}
+        className={className}
+        initialSaved={false}
+        session={null}
+      />
+    );
+  }
   const articles = await getSavedArticle();
   const isSaved = articles?.find((f) => f.title === data.title);
 

@@ -28,27 +28,28 @@ export default function SavedButtonClient(props: Props) {
         e.stopPropagation();
         if (!props.session) {
           router.push("/login");
-        }
-        if (isSaved) {
-          await deleteArticle({
-            title: props.data.title,
-            userId: props.session!.user.id,
-          });
-          router.refresh();
         } else {
-          await saveArticle({
-            data: {
-              userId: props.session!.user.id,
+          if (isSaved) {
+            await deleteArticle({
               title: props.data.title,
-              publishedAt: props.data.publishedAt,
-              author: props.data.author,
-              url: props.data.url,
-              content: props.data.content,
-              imageUrl: props.data.imageUrl,
-              description: props.data.description,
-            },
-          });
-          router.refresh();
+              userId: props.session.user.id,
+            });
+            router.refresh();
+          } else {
+            await saveArticle({
+              data: {
+                userId: props.session.user.id,
+                title: props.data.title,
+                publishedAt: props.data.publishedAt,
+                author: props.data.author,
+                url: props.data.url,
+                content: props.data.content,
+                imageUrl: props.data.imageUrl,
+                description: props.data.description,
+              },
+            });
+            router.refresh();
+          }
         }
         setSaved((prev) => !prev);
       }}

@@ -11,7 +11,7 @@ export default async function page() {
 
   return (
     <div>
-      <h2 className="text-2xl">Saved News</h2>
+      <h2 className="font-display mb-5 text-3xl font-medium">Saved News</h2>
       <ul className="grid grid-cols-1 gap-4 py-4 md:grid-cols-5">
         {articles?.map((article) => (
           <li key={article.id}>
