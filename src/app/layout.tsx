@@ -11,7 +11,7 @@ const newsCycle = News_Cycle({
 });
 
 export const metadata: Metadata = {
-  title: "FreshPress",
+  title: "Star Library",
   description: "",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
